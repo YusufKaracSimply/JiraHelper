@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Jira Ticket Özetleyici</title>
+  <link rel="icon" type="image/jpeg" href="icons/icon32.jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      width: 320px;
+      padding: 16px;
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #111827;
+    }
+
+    .input-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      box-sizing: border-box;
+      background-color: #fff;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3b82f6;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    .success {
+      color: #16a34a;
+      display: none;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    #promptOptions {
+      margin-bottom: 20px;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+
+    #promptOptions label {
+      display: inline-block;
+      margin-right: 12px;
+      font-weight: normal;
+    }
+
+    input[type="radio"] {
+      margin-right: 6px;
+    }
+    
+    .model-selection {
+      margin-bottom: 16px;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div style="display: flex; align-items: center;justify-content: center; gap: 10px; margin-bottom: 16px;">
+    <img src="icons/icon32.png" alt="Logo" width="28" height="28" style="border-radius: 6px;">
+    <h2 style="margin: 0; font-size: 18px;">Jira Ticket Özetleyici</h2>
+  </div>
+  
+  <div class="model-selection">
+    <label>AI Modeli Seçin:</label>
+    <br><br>
+    <label><input type="radio" name="modelChoice" value="openai" checked> OpenAI</label>
+    <label><input type="radio" name="modelChoice" value="gemini"> Gemini</label>
+  </div>
+  
+  <div class="input-group" id="openaiApiSection">
+    <label for="apiKey">OpenAI API Anahtarınızı Girin:</label>
+    <input type="text" id="apiKey" placeholder="OpenAI API Anahtarınız">
+  </div>
+
+  <div class="input-group" id="geminiApiSection" style="display: none;">
+    <label for="geminiApiKey">Gemini API Anahtarınızı Girin:</label>
+    <input type="text" id="geminiApiKey" placeholder="Gemini API Anahtarınız">
+  </div>
+
+  <div id="promptOptions">
+    <label>Prompt Seçeneği:</label>
+    <br><br>
+    <label><input type="radio" name="promptChoice" value="ready" checked> Hazır Prompt Kullan</label>
+    <label><input type="radio" name="promptChoice" value="custom"> Kendi Prompt'umu Gir</label>
+
+    <div id="readyPromptSection" style="display: none;">
+      <label for="readyPrompt">Hazır Prompt Seçin:</label>
+      <select id="readyPrompt">
+        <option value="Özeti çıkar">Ticket'ın kısa bir özetini çıkar.</option>
+        <option value="Detaylı özet çıkar">Ticket'ın detaylı bir özetini çıkar ve ana noktaları belirt.</option>
+        <option value="Aksiyon maddelerini listele">Ticket'taki aksiyon maddelerini listeleyin.</option>
+      </select>
+    </div>
+
+    <div id="customPromptSection" style="display: none;">
+      <label for="customPrompt">Kendi Prompt'unuzu Girin:</label>
+      <textarea id="customPrompt" rows="3" placeholder="Özel prompt'unuzu buraya girin."></textarea>
+    </div>
+  </div>
+
+  <button id="saveBtn">Kaydet</button>
+  <p id="successMessage" class="success">Ayarlar başarıyla kaydedildi!</p>
+
+  <script src="popup.js"></script>
+</body>
+</html>
